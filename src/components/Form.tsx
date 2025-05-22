@@ -52,7 +52,7 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
         <span className="label">Leistung</span>
         <input type="number" name="performance" id="performance"
           onChange={e => setPerformance(parseFloat(e.target.value))}
-          min="2025-01-01" max="2025-12-31" />
+          min="0" />
       </label>
 
       <div className="stats justify-end">
