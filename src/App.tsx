@@ -1,63 +1,7 @@
 import { useMemo, useState } from 'react'
-import type { Time, DisciplineFormula, Gender, Distance } from './types'
+import type { DisciplineFormula } from './types'
 import formulas from './formulas'
-
-function Discipline({ discipline }: { discipline: DisciplineFormula<any> }) {
-  const [gender, setGender] = useState<Gender>("female");
-  const [underground, setUnderground] = useState<string | undefined>(
-    discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
-  );
-  const [performance, setPerformance] = useState<Time | Distance>(0.0);
-  const grade = useMemo(() => {
-    if (discipline.undergrounds && underground) {
-      return discipline.undergrounds[underground][gender](performance);
-    } else if (discipline.undergrounds) {
-      return 0.0
-    } else {
-      return discipline.formulas[gender](performance);
-    };
-  }, [gender, underground, performance, discipline]);
-
-  return (
-    <>
-      <label htmlFor="gender" className="select">
-        <span className="label">Tu/Ti</span>
-        <select name="gender" id="gender"
-          onChange={e => setGender(e.target.value as Gender)}
-          value={gender}>
-          <option value="female">female</option>
-          <option value="male">male</option>
-        </select>
-      </label>
-
-      {discipline.undergrounds &&
-        <label htmlFor="underground" className="select">
-          <span className="label">Anlage</span>
-          <select name="underground" id="underground"
-            onChange={e => setUnderground(e.target.value)}
-            value={underground}>
-            {Object.keys(discipline.undergrounds).map(underground =>
-              <option value={underground}>{underground}</option>
-            )}
-          </select>
-        </label>
-      }
-
-      <label htmlFor="performance" className="input validator">
-        <span className="label">Leistung</span>
-        <input type="number" name="performance" id="performance"
-          onChange={e => setPerformance(parseFloat(e.target.value))}
-          min="2025-01-01" max="2025-12-31" />
-      </label>
-
-      <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-title">Note</div>
-          <div className="stat-value">{grade.toFixed(2)}</div>
-        </div>
-      </div>
-    </>);
-}
+import { Form } from './components/Form';
 
 function App() {
   const [discipline, setDiscipline] = useState<keyof typeof formulas>("Kugelstossen");
@@ -65,11 +9,13 @@ function App() {
 
 
   return (
-    <>
-      <h1>Notenrechner</h1>
-      <div className="card">
-        <div className="card body fieldset">
-          <label htmlFor="discipline" className="select">
+    <div className="min-h-screen bg-linear-65 from-blue-100 to-blue-300 flex flex-col justify-between">
+      <div className="navbar bg-base-100 shadow-sm">
+        <a className="btn btn-ghost text-xl">Notenrechner</a>
+      </div>
+      <main className="p-4 flex justify-center w-full">
+        <fieldset className="fieldset card shadow-sm p-2 bg-base-100 rounded-box max-w-md">
+          <label htmlFor="discipline" className="select w-full">
             <span className="label">Disziplin</span>
             <select name="discipline" id="discipline"
               onChange={e => setDiscipline(e.target.value)}
@@ -79,10 +25,17 @@ function App() {
               )}
             </select>
           </label>
-          <Discipline discipline={formula} />
-        </div>
-      </div>
-    </>
+          <Form discipline={formula} />
+        </fieldset>
+      </main>
+      <footer className="footer footer-horizontal footer-center text-base-content p-4">
+        <nav className="grid grid-flow-col gap-4">
+          <a className="link link-hover">TV Zeiningen</a>
+          <a className="link link-hover">About</a>
+          <a className="link link-hover">GitHub</a>
+        </nav>
+      </footer>
+    </div>
   )
 }
 
