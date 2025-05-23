@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { DisciplineFormula, Gender, Time, Distance } from "../types";
 import { Mars, Venus } from "lucide-react";
 
@@ -8,6 +8,11 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
     discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
   );
   const [performance, setPerformance] = useState<Time | Distance>(0.0);
+  useEffect(() => setUnderground( // TODO this does not feel right... what's best practice here?
+    discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
+  ),
+    [discipline.undergrounds]
+  )
   const grade = useMemo(() => {
     if (discipline.undergrounds && underground) {
       return discipline.undergrounds[underground][gender](performance);
@@ -48,11 +53,11 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
         </label>
       }
 
-      <label htmlFor="performance" className="input validator w-full">
+      <label htmlFor="performance" className="input w-full">
         <span className="label">Leistung</span>
         <input type="number" name="performance" id="performance"
           onChange={e => setPerformance(parseFloat(e.target.value))}
-          min="0" />
+        />
       </label>
 
       <div className="stats justify-end">
