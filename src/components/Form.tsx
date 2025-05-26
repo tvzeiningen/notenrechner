@@ -8,11 +8,11 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
     discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
   );
   const [performance, setPerformance] = useState<Time | Distance>(0.0);
-  useEffect(() => setUnderground( // TODO this does not feel right... what's best practice here?
-    discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
-  ),
-    [discipline.undergrounds]
-  )
+  
+  useEffect(() => { // TODO this does not feel right... what's best practice here?
+    const availableUndergrounds = discipline.undergrounds ? Object.keys(discipline.undergrounds) : [];
+    setUnderground(availableUndergrounds[0]);
+  }, [discipline]);
   const grade = useMemo(() => {
     if (discipline.undergrounds && underground) {
       return discipline.undergrounds[underground][gender](performance);
@@ -21,7 +21,8 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
     } else {
       return discipline.formulas[gender](performance);
     };
-  }, [gender, underground, performance, discipline]);
+  }, [gender, underground, performance]);
+  // discipline is not in deps since it's an indirect dep via underground (useEffect above)
 
   const toggleGender = () => gender === "female" ? setGender("male") : setGender("female");
 
@@ -47,7 +48,7 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
             onChange={e => setUnderground(e.target.value)}
             value={underground}>
             {Object.keys(discipline.undergrounds).map(underground =>
-              <option value={underground}>{underground}</option>
+              <option key={underground} value={underground}>{underground}</option>
             )}
           </select>
         </label>

@@ -6,7 +6,7 @@ import { Footer } from './components/Footer';
 import { NavBar } from './components/NavBar';
 
 function App() {
-  const [discipline, setDiscipline] = useState<keyof typeof formulas>("Kugelstossen");
+  const [discipline, setDiscipline] = useState<keyof typeof formulas>(Object.keys(formulas)[0]);
   const formula = useMemo<DisciplineFormula<any>>(() => formulas[discipline], [discipline]);
   const getInitialTheme = () => {
     const stored = localStorage.getItem("theme");
@@ -38,7 +38,7 @@ function App() {
               onChange={e => setDiscipline(e.target.value)}
               value={discipline}>
               {Object.keys(formulas).map(discipline =>
-                <option value={discipline}>{discipline}</option>
+                <option key={discipline} value={discipline}>{discipline}</option>
               )}
             </select>
           </label>
