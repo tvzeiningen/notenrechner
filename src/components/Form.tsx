@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import type { DisciplineFormula, Gender, Time, Distance } from "../types";
-import { Mars, Venus } from "lucide-react";
+import { Info, Mars, Venus } from "lucide-react";
 
 export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
   const [gender, setGender] = useState<Gender>("female");
@@ -8,21 +8,22 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
     discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
   );
   const [performance, setPerformance] = useState<Time | Distance>(0.0);
-  
-  useEffect(() => { // TODO this does not feel right... what's best practice here?
+
+  useEffect(() => {
     const availableUndergrounds = discipline.undergrounds ? Object.keys(discipline.undergrounds) : [];
     setUnderground(availableUndergrounds[0]);
   }, [discipline]);
   const grade = useMemo(() => {
-    if (discipline.undergrounds && underground) {
-      return discipline.undergrounds[underground][gender](performance);
-    } else if (discipline.undergrounds) {
-      return 0.0
+    if (discipline.undergrounds) {
+      if (underground && discipline.undergrounds[underground]) {
+        return discipline.undergrounds[underground][gender](performance);
+      } else if (discipline.undergrounds) {
+        return 0.0;
+      }
     } else {
       return discipline.formulas[gender](performance);
     };
-  }, [gender, underground, performance]);
-  // discipline is not in deps since it's an indirect dep via underground (useEffect above)
+  }, [gender, underground, performance, discipline]);
 
   const toggleGender = () => gender === "female" ? setGender("male") : setGender("female");
 
@@ -58,13 +59,17 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
         <span className="label">Leistung</span>
         <input type="number" name="performance" id="performance"
           onChange={e => setPerformance(parseFloat(e.target.value))}
+          value={performance.toString()}
         />
       </label>
 
       <div className="stats justify-end">
         <div className="stat">
+          <div className="tooltip" data-tip="hello">
+            <button className="btn btn-link"><Info /></button>
+          </div>
           <div className="stat-title text-right">Note</div>
-          <div className="stat-value">{grade.toFixed(2)}</div>
+          <div className="stat-value">{grade?.toFixed(2) ?? ""}</div>
         </div>
       </div>
     </>);
