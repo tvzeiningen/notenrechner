@@ -22,8 +22,23 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
       }
     } else {
       return discipline.formulas[gender](performance);
-    };
+    }
   }, [gender, underground, performance, discipline]);
+
+  const formulaText = useMemo(() => {
+    let f = "";
+    if (discipline.undergrounds) {
+      if (underground && discipline.undergrounds[underground]) {
+        f = discipline.undergrounds[underground][gender].toString();
+      } else if (discipline.undergrounds) {
+        return undefined;
+      }
+    } else {
+      f =  discipline.formulas[gender].toString();
+    }
+    f = f.split("=>")[1];
+    return `Note = ${f}`;
+  }, [gender, underground, discipline])
 
   const toggleGender = () => gender === "female" ? setGender("male") : setGender("female");
 
@@ -65,10 +80,12 @@ export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
 
       <div className="stats justify-end">
         <div className="stat">
-          <div className="tooltip" data-tip="hello">
-            <button className="btn btn-link"><Info /></button>
+          <div className=" flex flex-row justify-end gap-1">
+            <div className="tooltip tooltip-left" data-tip={formulaText}>
+              <Info size={16} />
+            </div>
+            <div className="stat-title text-right">Note</div>
           </div>
-          <div className="stat-title text-right">Note</div>
           <div className="stat-value">{grade?.toFixed(2) ?? ""}</div>
         </div>
       </div>
