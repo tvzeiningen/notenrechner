@@ -14,7 +14,7 @@ export function Footer() {
                     TV Zeiningen
                 </a>
                 <a onClick={openModal} className="link link-hover">About</a>
-                <a href="https://github.com/tvzeiningen" target="_blank" className="link link-hover">
+                <a href="https://github.com/tvzeiningen/notenrechner" target="_blank" className="link link-hover">
                     GitHub
                 </a>
 
