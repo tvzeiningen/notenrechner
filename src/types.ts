@@ -1,10 +1,8 @@
 export type Gender = "female" | "male";
 
-export interface Time {
-    minutes: number,
-    seconds: number,
-    millis: number,
-}
+/** Time in seconds */
+export type Time = number;
+/** Distance in cm */
 export type Distance = number;
 /** Performance */
 type Perf = Time | Distance;
