@@ -17,11 +17,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     environment:
-      name: prod
+      name: demo
       url: ${{ steps.deploy_to_pages.outputs.github_pages_url }}
     steps:
       - name: Checkout
