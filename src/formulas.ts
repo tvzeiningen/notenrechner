@@ -1,6 +1,6 @@
-import type { DisciplineFormula } from "./types";
+import type { DisciplineFormula, Distance, Time } from "./types";
 
-const formulas: Record<string, DisciplineFormula<any>> = {
+const formulas: Record<string, DisciplineFormula<Time | Distance>> = {
     "80 m PS": {
         undergrounds: {
             "Kunststoff": {
@@ -150,7 +150,7 @@ const formulas: Record<string, DisciplineFormula<any>> = {
             male: d => (d - 11) / 4,
         },
         undergrounds: undefined,
-    }, 
+    },
     "Speer 600 / 800 g": {
         undergrounds: {
             "Kunststoff": {
@@ -172,7 +172,7 @@ const formulas: Record<string, DisciplineFormula<any>> = {
     },
     "Steinstossen": {
         formulas: {
-            female: d => d+2,
+            female: d => d + 2,
             male: d => d,
         },
         undergrounds: undefined,

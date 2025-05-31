@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { DisciplineFormula } from './types'
+import type { DisciplineFormula, Distance, Time } from './types'
 import formulas from './formulas'
 import { Form } from './components/Form';
 import { Footer } from './components/Footer';
@@ -7,7 +7,7 @@ import { NavBar } from './components/NavBar';
 
 function App() {
   const [discipline, setDiscipline] = useState<keyof typeof formulas>(Object.keys(formulas)[0]);
-  const formula = useMemo<DisciplineFormula<any>>(() => formulas[discipline], [discipline]);
+  const formula = useMemo<DisciplineFormula<Time | Distance>>(() => formulas[discipline], [discipline]);
   const getInitialTheme = () => {
     const stored = localStorage.getItem("theme");
     if (stored) return stored;

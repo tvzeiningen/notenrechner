@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import type { DisciplineFormula, Gender, Time, Distance } from "../types";
 import { Info, Mars, Venus } from "lucide-react";
 
-export function Form({ discipline }: { discipline: DisciplineFormula<any> }) {
+export function Form({ discipline }: { discipline: DisciplineFormula<Time | Distance> }) {
   const [gender, setGender] = useState<Gender>("female");
   const [underground, setUnderground] = useState<string | undefined>(
     discipline.undergrounds ? Object.keys(discipline.undergrounds)[0] : undefined
