@@ -28,7 +28,7 @@ function App() {
     [theme]);
 
   return (
-    <div className={`min-h-screen bg-linear-65 flex flex-col justify-between ${background}`}>
+    <div className={`min-h-dvh bg-linear-65 flex flex-col justify-between ${background}`}>
       <NavBar initTheme={getInitialTheme()} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
       <main className="p-4 flex justify-center w-full">
         <fieldset className="fieldset card shadow-sm p-2 bg-base-100 rounded-box max-w-md">

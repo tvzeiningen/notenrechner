@@ -48,7 +48,7 @@ export function Form({ discipline }: { discipline: DisciplineFormula<Time | Dist
         <button onClick={toggleGender} name="female"
           className={`btn join-item flex-1/2 ${gender === "female" ? "btn-active" : ""}`}
         >
-          <Venus /> Turnerinn
+          <Venus /> Turnerin
         </button>
         <button onClick={toggleGender} name="male"
           className={`btn join-item flex-1/2 ${gender === "male" ? "btn-active" : ""}`}
