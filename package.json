@@ -7,6 +7,7 @@
     "name": "Simon Freiermuth",
     "email": "administrator@tvzeiningen.ch"
   },
+  "homepage": "https://github.com/tvzeiningen/notenrechner",
   "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
