@@ -1,7 +1,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useState } from "react";
 
-export function NavBar({ onToggleTheme, ...props }: { onToggleTheme: () => void, initTheme: string }) {
+export function TopAppBar({ onToggleTheme, ...props }: { onToggleTheme: () => void, initTheme: string }) {
     const [checked, setChecked] = useState(props.initTheme === "dark");
     const toggleTheme = () => {
         onToggleTheme();

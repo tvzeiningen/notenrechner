@@ -1,13 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { DisciplineFormula, Distance, Time } from './types'
-import formulas from './formulas'
-import { Form } from './components/Form';
-import { Footer } from './components/Footer';
-import { NavBar } from './components/NavBar';
+import { TopAppBar } from './components/NavBar';
+import Router, { useRoute } from './screens/Router';
+import Dock from './components/Dock';
 
 function App() {
-  const [discipline, setDiscipline] = useState<keyof typeof formulas>(Object.keys(formulas)[0]);
-  const formula = useMemo<DisciplineFormula<Time | Distance>>(() => formulas[discipline], [discipline]);
   const getInitialTheme = () => {
     const stored = localStorage.getItem("theme");
     if (stored) return stored;
@@ -26,27 +22,18 @@ function App() {
     ? "from-blue-100 to-blue-300"
     : "from-blue-900 to-blue-950",
     [theme]);
+  const { route } = useRoute();
 
   return (
-    <div className={`min-h-dvh bg-linear-65 flex flex-col justify-between ${background}`}>
-      <NavBar initTheme={getInitialTheme()} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
-      <main className="p-4 flex justify-center w-full">
-        <fieldset className="fieldset card shadow-sm p-2 bg-base-100 rounded-box max-w-md">
-          <label htmlFor="discipline" className="select w-full">
-            <span className="label">Disziplin</span>
-            <select name="discipline" id="discipline"
-              onChange={e => setDiscipline(e.target.value)}
-              value={discipline}>
-              {Object.keys(formulas).map(discipline =>
-                <option key={discipline} value={discipline}>{discipline}</option>
-              )}
-            </select>
-          </label>
-          <Form discipline={formula} />
-        </fieldset>
-      </main>
-      <Footer />
-    </div>
+      <div className={`h-dvh bg-linear-65 flex flex-col ${background}`}>
+        <TopAppBar initTheme={getInitialTheme()} onToggleTheme={() => setTheme(theme === "light" ? "dark" : "light")} />
+
+        <main className="p-4 flex-1 flex flex-col items-center overflow-hidden">
+          <Router route={route} />
+        </main>
+        
+        <Dock />
+      </div>
   )
 }
 
