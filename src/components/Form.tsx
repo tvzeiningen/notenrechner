@@ -74,7 +74,6 @@ export function Form({ discipline }: { discipline: DisciplineFormula<Time | Dist
         <span className="label">Leistung</span>
         <input type="number" name="performance" id="performance"
           onChange={e => setPerformance(parseFloat(e.target.value))}
-          value={performance.toString()}
         />
       </label>
 
