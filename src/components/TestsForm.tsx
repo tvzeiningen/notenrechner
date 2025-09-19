@@ -76,7 +76,7 @@ export default function TestsForm({ testFormulas: testFormulas }: { testFormulas
         {(females + males !== teamSize) ?
             <div role="alert" className="alert alert-error">
                 <XCircle />
-                <span>In {exercise} starten (pro Durchgang) immer aus genau {teamSize} Mitgliedern.</span>
+                <span>In {exercise} starten (pro Durchgang) immer genau {teamSize} Personen.</span>
             </div> :
             formula && <BaseForm
                 formula={formula}
