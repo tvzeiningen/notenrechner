@@ -7,7 +7,7 @@ const testsFormulas: Record<string, TestFormulas> = {
             "Aufgabe 2": (d, F, M) => ((F * (d - 46) / 10.6) + (M * (d - 75) / 10.9)) / (F + M),
         }
     },
-    "Unohockey": {
+    "Unihockey": {
         formulas: {
             "Aufgabe 1": (d, F, M) => ((F * (d - 12) / 6.2) + (M * (d - 20) / 7.5)) / (F + M),
             "Aufgabe 2": (d, F, M) => ((F * (d - 18) / 13.8) + (M * (d - 7) / 19.1)) / (F + M),
