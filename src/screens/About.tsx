@@ -40,6 +40,13 @@ export function AboutScreen() {
                 <p className="italic">
                     zuletzt aktualisiert: 26.05.2025
                 </p>
+                <a target="_blank" href="https://www.stv-fsg.ch/fileadmin/user_upload/Hauptseite/Sport/Turnen/Fachtest/Wertungstabellen_Fachtest_2023_df.pdf"
+                    className="link">
+                    Wertungstabelle Fachteste 2023 - Vereinswettkampf
+                </a>
+                <p className="italic">
+                    zuletzt aktualisiert: 19.09.2025
+                </p>
             </span>
             <h3 className="font-bold text-lg">Libraries & Lizenzen</h3>
             <div className="space-y-1">

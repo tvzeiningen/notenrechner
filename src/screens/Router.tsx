@@ -12,7 +12,10 @@ const appScreens = {
 export type AppRoute = keyof typeof appScreens;
 
 export default function Router({ route }: { route: AppRoute }) {
-    return appScreens[route]();
+    const Screen = appScreens[route];
+    return (
+      <Screen />
+    );
 }
 
 type RouteContextType = {

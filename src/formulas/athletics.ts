@@ -1,6 +1,6 @@
-import type { DisciplineFormula, Distance, Time } from "./types";
+import type { DisciplineFormula, Distance, Time } from "../types";
 
-const formulas: Record<string, DisciplineFormula<Time | Distance>> = {
+const athleticsFormulas: Record<string, DisciplineFormula<Time | Distance>> = {
     "80 m PS": {
         undergrounds: {
             "Kunststoff": {
@@ -179,4 +179,4 @@ const formulas: Record<string, DisciplineFormula<Time | Distance>> = {
     },
 };
 
-export default formulas;
+export default athleticsFormulas;
